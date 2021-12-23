@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 800px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "CNG tank mass intercept", "label": "CNG tank mass intercept", "shape": "dot", "size": 10}, {"id": "climate change", "label": "climate change", "shape": "dot", "size": 10}, {"id": "fossil depletion", "label": "fossil depletion", "shape": "dot", "size": 10}, {"id": "auxilliary power base demand", "label": "auxilliary power base demand", "shape": "dot", "size": 10}, {"id": "human toxicity", "label": "human toxicity", "shape": "dot", "size": 10}, {"id": "average passenger mass", "label": "average passenger mass", "shape": "dot", "size": 10}, {"id": "battery cell production energy", "label": "battery cell production energy", "shape": "dot", "size": 10}, {"id": "battery lifetime kilometers", "label": "battery lifetime kilometers", "shape": "dot", "size": 10}, {"id": "metal depletion", "label": "metal depletion", "shape": "dot", "size": 10}, {"id": "battery onboard charging infrastructure cost", "label": "battery onboard charging infrastructure cost", "shape": "dot", "size": 10}, {"id": "combustion exhaust treatment cost", "label": "combustion exhaust treatment cost", "shape": "dot", "size": 10}, {"id": "combustion fixed mass", "label": "combustion fixed mass", "shape": "dot", "size": 10}, {"id": "combustion powertrain cost per kW", "label": "combustion powertrain cost per kW", "shape": "dot", "size": 10}, {"id": "cooling thermal demand", "label": "cooling thermal demand", "shape": "dot", "size": 10}, {"id": "electric fixed mass", "label": "electric fixed mass", "shape": "dot", "size": 10}, {"id": "electric powertrain cost per kW", "label": "electric powertrain cost per kW", "shape": "dot", "size": 10}, {"id": "energy battery cost per kWh", "label": "energy battery cost per kWh", "shape": "dot", "size": 10}, {"id": "energy battery mass", "label": "energy battery mass", "shape": "dot", "size": 10}, {"id": "fuel cell power area density", "label": "fuel cell power area density", "shape": "dot", "size": 10}, {"id": "fuel mass", "label": "fuel mass", "shape": "dot", "size": 10}, {"id": "fuel tank cost per kg", "label": "fuel tank cost per kg", "shape": "dot", "size": 10}, {"id": "glider base mass", "label": "glider base mass", "shape": "dot", "size": 10}, {"id": "glider cost intercept", "label": "glider cost intercept", "shape": "dot", "size": 10}, {"id": "heat pump cost", "label": "heat pump cost", "shape": "dot", "size": 10}, {"id": "inverter mass", "label": "inverter mass", "shape": "dot", "size": 10}, {"id": "kilometers per year", "label": "kilometers per year", "shape": "dot", "size": 10}, {"id": "lifetime kilometers", "label": "lifetime kilometers", "shape": "dot", "size": 10}, {"id": "power to mass ratio", "label": "power to mass ratio", "shape": "dot", "size": 10}, {"id": "year", "label": "year", "shape": "dot", "size": 10}, {"id": "cargo mass", "label": "cargo mass", "shape": "dot", "size": 10}, {"id": "fuel cell lifetime hours", "label": "fuel cell lifetime hours", "shape": "dot", "size": 10}, {"id": "heating thermal demand", "label": "heating thermal demand", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"arrows": "to", "from": "CNG tank mass intercept", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "CNG tank mass intercept", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "auxilliary power base demand", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "auxilliary power base demand", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "auxilliary power base demand", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "average passenger mass", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "battery cell production energy", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "battery cell production energy", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "battery cell production energy", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "battery lifetime kilometers", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "battery lifetime kilometers", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "battery lifetime kilometers", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "battery lifetime kilometers", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "battery onboard charging infrastructure cost", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "battery onboard charging infrastructure cost", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "battery onboard charging infrastructure cost", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "battery onboard charging infrastructure cost", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "combustion exhaust treatment cost", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "combustion exhaust treatment cost", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "combustion exhaust treatment cost", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "combustion exhaust treatment cost", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "combustion fixed mass", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "combustion fixed mass", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "combustion powertrain cost per kW", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "cooling thermal demand", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "cooling thermal demand", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "electric fixed mass", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "electric powertrain cost per kW", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "electric powertrain cost per kW", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "electric powertrain cost per kW", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "energy battery cost per kWh", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "energy battery cost per kWh", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "energy battery cost per kWh", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "energy battery cost per kWh", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "energy battery mass", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "energy battery mass", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "energy battery mass", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "energy battery mass", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "fuel cell power area density", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "fuel cell power area density", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "fuel mass", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "fuel tank cost per kg", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "fuel tank cost per kg", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "fuel tank cost per kg", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "fuel tank cost per kg", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "glider base mass", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "glider base mass", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "glider base mass", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "glider base mass", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "glider cost intercept", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "glider cost intercept", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "glider cost intercept", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "glider cost intercept", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "heat pump cost", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "heat pump cost", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "heat pump cost", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "heat pump cost", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "inverter mass", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "kilometers per year", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "kilometers per year", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "kilometers per year", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "kilometers per year", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "lifetime kilometers", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "lifetime kilometers", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "lifetime kilometers", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "lifetime kilometers", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "power to mass ratio", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "power to mass ratio", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "year", "to": "climate change", "weight": 1}, {"arrows": "to", "from": "year", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "year", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "year", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "cargo mass", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "cargo mass", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "cargo mass", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "fuel cell lifetime hours", "to": "fossil depletion", "weight": 1}, {"arrows": "to", "from": "fuel cell lifetime hours", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "fuel cell lifetime hours", "to": "metal depletion", "weight": 1}, {"arrows": "to", "from": "heating thermal demand", "to": "human toxicity", "weight": 1}, {"arrows": "to", "from": "heating thermal demand", "to": "metal depletion", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
